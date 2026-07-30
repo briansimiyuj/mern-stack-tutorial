@@ -1,10 +1,3 @@
-MERN Stack uses 4 technologies to build a full-stack applications. 
-These technologies are:
-    1. MongoDB - NoSQL database
-    2. Express.js - Server-side framework
-    3. React.js - Front-end framework
-    4. Node.js - Server-side runtime environment
+Let's start with the backend, let's install express 
 
-React sends a request to the server, server fetches data from MongoDB and sends it back to React. React then displays the data on the page. The server sends back the data as a JSON object.
-
-video #1
+video #2
