@@ -1,10 +1,3 @@
-Let's create routes for our application;; `workOutRoute.js` and a controller file `workOutController.js`
+Let's setup MongoDB connection with Mongoose
 
-Then in `workOutController.js` we will create functions to create, read, update and delete work outs
-
-Then in `workOutRoute.js` we will create routes to call these functions
-
-In order to access the information in the request body, we need to a middleware in our server file `script.js` to parse the request body
-    `app.use(express.json())`
-
-video #3
+video #4
