@@ -2,7 +2,28 @@ import Workout from "../models/Workout.js"
 
 const getWorkouts = async(req, res) =>{
 
-    res.json({ message: "get workouts" })
+    try{
+    
+        const workouts = await Workout.find().sort({ createdAt: -1 })
+
+        if(workouts){
+            
+            res.status(200).json(workouts)
+            
+        }else{
+            
+            return res.status(404).json({ message: "No workouts found" })
+
+        }
+
+    
+    }catch(error){
+
+        res.status(400).json({ error: error.message })
+    
+        console.log('Error: ', error)
+    
+    }
 
 }
 
