@@ -29,7 +29,27 @@ const getWorkouts = async(req, res) =>{
 
 const getSingleWorkout = async(req, res) =>{
 
-    res.json({ message: "get single workout" })
+    try{
+    
+        const workout = await Workout.findById(req.params.id)
+
+        if(workout){
+
+            res.status(200).json(workout)
+
+        }else{
+
+            return res.status(404).json({ message: "No workout found" })
+
+        }
+    
+    }catch(error){
+
+        res.status(400).json({ error: error.message })
+    
+        console.log('Error: ', error)
+    
+    }
 
 }
 
