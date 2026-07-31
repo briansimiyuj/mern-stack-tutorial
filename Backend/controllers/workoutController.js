@@ -1,3 +1,4 @@
+import mongoose from "mongoose"
 import Workout from "../models/Workout.js"
 
 const getWorkouts = async(req, res) =>{
@@ -30,8 +31,16 @@ const getWorkouts = async(req, res) =>{
 const getSingleWorkout = async(req, res) =>{
 
     try{
+
+        const { id } = req.params
+
+        if(!mongoose.Types.ObjectId.isValid(id)){
+
+            return res.status(404).json({ message: "No workout found" })
+            
+        }
     
-        const workout = await Workout.findById(req.params.id)
+        const workout = await Workout.findById(id)
 
         if(workout){
 
