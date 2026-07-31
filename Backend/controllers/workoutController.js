@@ -85,8 +85,22 @@ const createWorkout = async(req, res) =>{
 const deleteWorkout = async(req, res) =>{
 
     try{
+
+        const { id } = req.params
+
+        if(!mongoose.Types.ObjectId.isValid(id)){
+
+            return res.status(404).json({ message: "No workout found" })
+
+        }
     
-        const workout = await Workout.findByIdAndDelete(req.params.id)
+        const workout = await Workout.findByIdAndDelete(id)
+
+        if(!workout){
+
+            return res.status(404).json({ message: "No workout found" })
+
+        }
 
         res.status(200).json({
             message: "Workout deleted successfully",
