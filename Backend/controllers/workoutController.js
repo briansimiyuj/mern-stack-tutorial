@@ -81,7 +81,22 @@ const deleteWorkout = async(req, res) =>{
 
 const updateWorkout = async(req, res) =>{
 
-    res.json({ message: "update workout" })
+    try{
+    
+        const workout = await Workout.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+        res.status(200).json({
+            message: "Workout updated successfully",
+            workout
+        })
+    
+    }catch(error){
+
+        res.status(400).json({ error: error.message })
+    
+        console.log('Error: ', error)
+    
+    }
 
 }
 
