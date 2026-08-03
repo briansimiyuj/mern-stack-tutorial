@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import type { WorkoutType } from "../assets/types/WorkoutType"
+import WorkoutDetails from "../components/WorkoutDetails"
 
 const Home: React.FC = ()=>{
 
@@ -19,10 +20,6 @@ const Home: React.FC = ()=>{
                 setWorkouts(data)
 
             }
-
-            console.log(data)
-
-            console.log(workouts)
             
         }
 
@@ -40,7 +37,7 @@ const Home: React.FC = ()=>{
                 
                     workouts && workouts.map(workout =>(
                 
-                        <p key={workout._id}>{workout.title}</p>
+                        <WorkoutDetails workout={workout} key={workout._id}/>
                 
                     ))
                 
