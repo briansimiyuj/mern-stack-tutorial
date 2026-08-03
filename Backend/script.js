@@ -1,9 +1,12 @@
 import express from "express"
+import cors from "cors"
 import workoutRoute from "./routes/workoutRoute.js"
 import connectDB from "./config/DBConnect.js"
 
 const app = express(),
       PORT = process.env.PORT
+
+app.use(cors())
 
 app.use(express.json()) 
 
