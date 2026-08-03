@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
+import { WorkoutContextProvider } from "./context/WorkoutContext"
 
 const App: React.FC = ()=>{
 
@@ -14,11 +15,15 @@ const App: React.FC = ()=>{
       
         <div className="pages">
 
-          <Routes>
+          <WorkoutContextProvider>
+
+            <Routes>
           
-            <Route path="/" element={<Home/>} />
+              <Route path="/" element={<Home/>}/>
+
+            </Routes> 
             
-          </Routes> 
+          </WorkoutContextProvider>
 
         </div>
       
