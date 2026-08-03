@@ -1,1 +1,4 @@
-video #5
+Let's now work on the frontend using React.
+We'll install `react-router-dom` to handle routing.
+
+video #8
