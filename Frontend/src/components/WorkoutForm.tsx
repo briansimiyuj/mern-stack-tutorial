@@ -1,0 +1,45 @@
+import { useWorkoutContext } from "../context/WorkoutContext"
+
+const WorkoutForm: React.FC = ()=>{
+
+    const { title, setTitle, reps, setReps, load, setLoad } = useWorkoutContext()
+
+    return(
+
+        <form action="" className="create">
+
+            <h3>Add a New Workout</h3>
+
+            <label htmlFor="title">Exercise Title:</label>
+
+            <input
+               type="text"
+               value={title}
+               onChange={e => setTitle(e.target.value)}
+            />
+        
+            <label htmlFor="load">Load (in kg):</label>
+
+            <input
+               type="number"
+               value={load}
+               onChange={e => setLoad(Number(e.target.value))}
+            />
+
+            <label htmlFor="reps">Reps:</label>
+
+            <input
+               type="number"
+               value={reps}
+               onChange={e => setReps(Number(e.target.value))}
+            />
+
+            <button>Add Workout</button>
+
+        </form>
+
+    )
+
+}
+
+export default WorkoutForm

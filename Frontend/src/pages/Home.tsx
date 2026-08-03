@@ -1,5 +1,6 @@
 import WorkoutDetails from "../components/WorkoutDetails"
 import { useWorkoutContext } from "../context/WorkoutContext"
+import WorkoutForm from "../components/WorkoutForm"
 
 const Home: React.FC = ()=>{
 
@@ -22,6 +23,8 @@ const Home: React.FC = ()=>{
                 }
 
             </div>
+
+            <WorkoutForm/>
 
         </div>
 

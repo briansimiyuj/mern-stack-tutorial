@@ -25,8 +25,6 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
                     data = await response.json()
         
             if(response.ok){
-
-                console.log(data)
                 
                 setWorkouts(data)
 
