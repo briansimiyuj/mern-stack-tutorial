@@ -9,5 +9,7 @@ export interface WorkoutContextProps{
     setReps: (reps: number) => void,
     load: number,
     setLoad: (load: number) => void
+    error: string | null,
+    setError: (error: string | null) => void
 
 }

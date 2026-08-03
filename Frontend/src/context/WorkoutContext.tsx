@@ -15,8 +15,9 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
     const [workouts, setWorkouts] = useState<WorkoutType[]>([]),
           [title, setTitle] = useState<string>(''),
           [reps, setReps] = useState<number>(0),
-          [load, setLoad] = useState<number>(0)
-        
+          [load, setLoad] = useState<number>(0),
+          [error, setError] = useState<string | null>(null)
+
     useEffect(() =>{
         
         const fetchWorkout = async() =>{
@@ -44,7 +45,9 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
         reps,
         setReps,
         load,
-        setLoad
+        setLoad,
+        error,
+        setError
 
     }
 
