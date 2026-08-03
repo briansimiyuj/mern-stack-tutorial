@@ -3,7 +3,7 @@ import { useSubmitWorkout } from "../hooks/useSubmitWorkout"
 
 const WorkoutForm: React.FC = ()=>{
 
-    const { title, setTitle, reps, setReps, load, setLoad } = useWorkoutContext(),
+    const { title, setTitle, reps, setReps, load, setLoad, error } = useWorkoutContext(),
           { handleSubmit } = useSubmitWorkout()
 
     return(
@@ -37,6 +37,16 @@ const WorkoutForm: React.FC = ()=>{
             />
 
             <button>Add Workout</button>
+
+            {
+            
+                error &&(
+            
+                    <div className="error">{error}</div>
+            
+                )
+            
+            }
 
         </form>
 
