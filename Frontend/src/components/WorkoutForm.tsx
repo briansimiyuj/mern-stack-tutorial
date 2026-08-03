@@ -1,12 +1,14 @@
 import { useWorkoutContext } from "../context/WorkoutContext"
+import { useSubmitWorkout } from "../hooks/useSubmitWorkout"
 
 const WorkoutForm: React.FC = ()=>{
 
-    const { title, setTitle, reps, setReps, load, setLoad } = useWorkoutContext()
+    const { title, setTitle, reps, setReps, load, setLoad } = useWorkoutContext(),
+          { handleSubmit } = useSubmitWorkout()
 
     return(
 
-        <form action="" className="create">
+        <form onSubmit={handleSubmit} className="create">
 
             <h3>Add a New Workout</h3>
 
