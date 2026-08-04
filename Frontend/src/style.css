@@ -102,7 +102,7 @@ header a{
 }
 
 .delete-btn{
-  background: var(--error);
+  background: var(--error) !important;
   color: #fff;
 }
 
@@ -183,4 +183,8 @@ div.error{
 
 .modal form button{
   margin-top: 10px;
+}
+
+.modal button + button{
+  margin-left: 10px;
 }
