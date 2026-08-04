@@ -180,3 +180,7 @@ div.error{
   cursor: pointer;
   margin-top: 10px;
 }
+
+.modal form button{
+  margin-top: 10px;
+}
