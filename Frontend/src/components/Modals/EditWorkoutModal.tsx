@@ -1,8 +1,10 @@
 import { useWorkoutContext } from "../../context/WorkoutContext"
+import { useEditWorkout } from "../../hooks/useEditWorkout"
 
 const EditWorkoutModal: React.FC = ()=>{
 
-    const { modalOpen, selectedWorkout, modalType, title, setTitle, reps, setReps, load, setLoad, closeModal } = useWorkoutContext()
+    const { modalOpen, selectedWorkout, modalType, title, setTitle, reps, setReps, load, setLoad, closeModal } = useWorkoutContext(),
+          { handleEdit } = useEditWorkout()
 
     if(!modalOpen || !selectedWorkout || modalType !== 'edit') return null
 
@@ -15,7 +17,7 @@ const EditWorkoutModal: React.FC = ()=>{
 
                 <h3>Edit Workout</h3>
 
-                <form>
+                <form onSubmit={handleEdit}>
 
                     <label>Title</label>
 
