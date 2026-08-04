@@ -16,7 +16,10 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
           [title, setTitle] = useState<string>(''),
           [reps, setReps] = useState<number>(0),
           [load, setLoad] = useState<number>(0),
-          [error, setError] = useState<string | null>(null)
+          [error, setError] = useState<string | null>(null),
+          [modalOpen, setModalOpen] = useState<boolean>(false),
+          [selectedWorkout, setSelectedWorkout] = useState<WorkoutType | null>(null),
+          [modalType, setModalType] = useState<string | null>(null)
 
     useEffect(() =>{
         
@@ -47,7 +50,13 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
         load,
         setLoad,
         error,
-        setError
+        setError,
+        modalOpen,
+        setModalOpen,
+        selectedWorkout,
+        setSelectedWorkout,
+        modalType,
+        setModalType
 
     }
 
