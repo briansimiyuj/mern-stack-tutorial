@@ -1,3 +1,4 @@
+import { useWorkoutContext } from "../context/WorkoutContext"
 import type { WorkoutType } from "../assets/types/WorkoutType"
 
 interface WorkoutDetailsProps{
@@ -7,6 +8,8 @@ interface WorkoutDetailsProps{
 }
 
 const WorkoutDetails: React.FC<WorkoutDetailsProps> = ({ workout })=>{
+
+    const { setModalOpen, setSelectedWorkout, setModalType } = useWorkoutContext()
 
     return(
 
@@ -22,11 +25,32 @@ const WorkoutDetails: React.FC<WorkoutDetailsProps> = ({ workout })=>{
 
             <div className="workout-actions">
 
-                <button type="button" className="view-btn">View</button>
+                <button 
+                    className="view-btn" 
+                    onClick={() =>{
+                        setSelectedWorkout(workout)
+                        setModalType('view')
+                        setModalOpen(true)
+                    }}
+                >View</button>
 
-                <button type="button" className="edit-btn">Edit</button>
+                <button 
+                    className="edit-btn" 
+                    onClick={() =>{
+                        setSelectedWorkout(workout)
+                        setModalType('edit')
+                        setModalOpen(true)
+                    }}
+                >Edit</button>
 
-                <button type="button" className="delete-btn">Delete</button>
+                <button 
+                    className="delete-btn" 
+                    onClick={() =>{
+                        setSelectedWorkout(workout)
+                        setModalType('delete')
+                        setModalOpen(true)
+                    }}
+                >Delete</button>
 
             </div>
 
