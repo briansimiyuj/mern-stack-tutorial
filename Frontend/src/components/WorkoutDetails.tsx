@@ -20,6 +20,16 @@ const WorkoutDetails: React.FC<WorkoutDetailsProps> = ({ workout })=>{
 
             <p><strong>Created At: </strong>{workout.createdAt}</p>
 
+            <div className="workout-actions">
+
+                <button type="button" className="view-btn">View</button>
+
+                <button type="button" className="edit-btn">Edit</button>
+
+                <button type="button" className="delete-btn">Delete</button>
+
+            </div>
+
         </div>
 
     )

@@ -75,6 +75,37 @@ header a{
   color: #333;
 }
 
+.workout-actions{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.workout-actions button{
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Poppins";
+  font-size: 0.85em;
+}
+
+.view-btn{
+  background: #54d1ab;
+  color: #fff;
+}
+
+.edit-btn{
+  background: #f1f1f1;
+  color: #333;
+}
+
+.delete-btn{
+  background: var(--error);
+  color: #fff;
+}
+
 label, input{
   display: block;
 }
