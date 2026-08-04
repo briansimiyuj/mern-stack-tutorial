@@ -64,6 +64,16 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
     
     }
 
+    const closeModal = () =>{
+
+        setModalOpen(false)
+        
+        setSelectedWorkout(null)
+
+        setModalType(null)
+
+    }
+
     const contextValue: WorkoutContextProps ={
 
         workouts,
@@ -82,7 +92,8 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
         selectedWorkout,
         setSelectedWorkout,
         modalType,
-        setModalType
+        setModalType,
+        closeModal
 
     }
 

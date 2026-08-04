@@ -18,6 +18,7 @@ export interface WorkoutContextProps{
     selectedWorkout: WorkoutType | null,
     setSelectedWorkout: (selectedWorkout: WorkoutType | null) => void,
     modalType: string | null,
-    setModalType: (modalType: string | null) => void
+    setModalType: (modalType: string | null) => void,
+    closeModal: () => void
 
 }
