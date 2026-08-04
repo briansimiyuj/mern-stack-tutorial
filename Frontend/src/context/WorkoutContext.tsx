@@ -13,6 +13,7 @@ export const WorkoutContext = createContext<WorkoutContextProps | undefined>(und
 export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ children })=>{
 
     const [workouts, setWorkouts] = useState<WorkoutType[]>([]),
+          [workout, setWorkout] = useState<WorkoutType | null>(null),
           [title, setTitle] = useState<string>(''),
           [reps, setReps] = useState<number>(0),
           [load, setLoad] = useState<number>(0),
@@ -40,9 +41,34 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
     
     }, [workouts])
 
+    const fetchSingleWorkout = async(ID: string): Promise<WorkoutType | null> =>{
+    
+        const response = await fetch(`http://localhost:4000/api/workouts/${ID}`),
+              data = await response.json()
+
+        if(response.ok){
+
+            setWorkout(data)
+
+            return data
+
+        }else{
+
+            setError(data.error)
+
+            setWorkout(null)
+
+            return null
+
+        }
+    
+    }
+
     const contextValue: WorkoutContextProps ={
 
         workouts,
+        workout,
+        fetchSingleWorkout,
         title,
         setTitle,
         reps,

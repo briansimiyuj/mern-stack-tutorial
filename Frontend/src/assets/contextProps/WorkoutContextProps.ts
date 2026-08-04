@@ -3,6 +3,8 @@ import type { WorkoutType } from "../types/WorkoutType"
 export interface WorkoutContextProps{
 
     workouts: WorkoutType[],
+    workout: WorkoutType | null,
+    fetchSingleWorkout: (ID: string) => Promise<WorkoutType | null>,
     title: string,
     setTitle: (title: string) => void,
     reps: number,
