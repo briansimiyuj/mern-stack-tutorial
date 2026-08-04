@@ -138,3 +138,45 @@ div.error{
   border-radius: 4px;
   margin: 20px 0;
 }
+
+.modal-overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal{
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  width: 400px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.modal h3{
+  margin-top: 0;
+  color: var(--primary);
+}
+
+.modal p{
+  margin: 10px 0;
+  color: #555;
+}
+
+.modal-close-btn{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}

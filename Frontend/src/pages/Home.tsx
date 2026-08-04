@@ -1,10 +1,11 @@
 import WorkoutDetails from "../components/WorkoutDetails"
+import ViewWorkoutModal from "../components/Modals/ViewWorkoutModal"
 import { useWorkoutContext } from "../context/WorkoutContext"
 import WorkoutForm from "../components/WorkoutForm"
 
 const Home: React.FC = ()=>{
 
-    const { workouts } = useWorkoutContext()
+    const { workouts,  } = useWorkoutContext()
 
     return(
 
@@ -25,6 +26,8 @@ const Home: React.FC = ()=>{
             </div>
 
             <WorkoutForm/>
+
+            <ViewWorkoutModal/>
 
         </div>
 

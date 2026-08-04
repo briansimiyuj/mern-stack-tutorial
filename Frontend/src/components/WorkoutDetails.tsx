@@ -9,7 +9,23 @@ interface WorkoutDetailsProps{
 
 const WorkoutDetails: React.FC<WorkoutDetailsProps> = ({ workout })=>{
 
-    const { setModalOpen, setSelectedWorkout, setModalType } = useWorkoutContext()
+    const { fetchSingleWorkout, setModalOpen, setSelectedWorkout, setModalType } = useWorkoutContext()
+
+    const openModal = async(type: string) =>{
+
+        const data = await fetchSingleWorkout(workout._id)
+
+        if(data){
+
+            setSelectedWorkout(data)
+            
+            setModalType(type)
+            
+            setModalOpen(true)
+
+        }
+
+    }
 
     return(
 
@@ -27,29 +43,17 @@ const WorkoutDetails: React.FC<WorkoutDetailsProps> = ({ workout })=>{
 
                 <button 
                     className="view-btn" 
-                    onClick={() =>{
-                        setSelectedWorkout(workout)
-                        setModalType('view')
-                        setModalOpen(true)
-                    }}
+                    onClick={() => openModal('view')}
                 >View</button>
 
                 <button 
                     className="edit-btn" 
-                    onClick={() =>{
-                        setSelectedWorkout(workout)
-                        setModalType('edit')
-                        setModalOpen(true)
-                    }}
+                    onClick={() => openModal('edit')}
                 >Edit</button>
 
                 <button 
                     className="delete-btn" 
-                    onClick={() =>{
-                        setSelectedWorkout(workout)
-                        setModalType('delete')
-                        setModalOpen(true)
-                    }}
+                    onClick={() => openModal('delete')}
                 >Delete</button>
 
             </div>
