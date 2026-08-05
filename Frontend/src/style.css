@@ -188,3 +188,7 @@ div.error{
 .modal button + button{
   margin-left: 10px;
 }
+
+input.error{
+  border-color: var(--error);
+}
