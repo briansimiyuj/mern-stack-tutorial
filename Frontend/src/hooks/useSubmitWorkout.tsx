@@ -2,19 +2,11 @@ import { useWorkoutContext } from "../context/WorkoutContext"
 
 export const useSubmitWorkout = () =>{
 
-    const { title, reps, load, setError, setLoad, setReps, setTitle } = useWorkoutContext()
+    const { title, reps, load, setError, setLoad, setReps, setTitle, setEmptyFields } = useWorkoutContext()
 
     const handleSubmit = async(e: React.SubmitEvent<HTMLFormElement>) =>{
     
         e.preventDefault()
-
-        if(!title || !reps || !load){
-
-            setError('Please fill in all fields')
-
-            return
-            
-        }
 
         const workout = { title, reps, load },
                 response = await fetch("http://localhost:4000/api/workouts/create", {
@@ -33,6 +25,8 @@ export const useSubmitWorkout = () =>{
 
             setError(data.error)
 
+            setEmptyFields(data.emptyFields)
+
         }
 
         if(response.ok){
@@ -44,6 +38,8 @@ export const useSubmitWorkout = () =>{
             setReps(0)
 
             setLoad(0)
+
+            setEmptyFields([])
 
             console.log('New Workout Added', data)
 

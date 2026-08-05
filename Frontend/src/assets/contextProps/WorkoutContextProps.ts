@@ -11,6 +11,8 @@ export interface WorkoutContextProps{
     setReps: (reps: number | null) => void,
     load: number | null,
     setLoad: (load: number | null) => void,
+    emptyFields: [],
+    setEmptyFields: (emptyFields: []) => void,
     error: string | null,
     setError: (error: string | null) => void,
     modalOpen: boolean,
