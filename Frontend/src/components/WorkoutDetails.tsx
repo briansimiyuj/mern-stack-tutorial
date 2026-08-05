@@ -1,5 +1,6 @@
 import { useWorkoutContext } from "../context/WorkoutContext"
 import type { WorkoutType } from "../assets/types/WorkoutType"
+import { formatDistanceToNow } from "date-fns/formatDistanceToNow"
 
 interface WorkoutDetailsProps{
 
@@ -37,7 +38,7 @@ const WorkoutDetails: React.FC<WorkoutDetailsProps> = ({ workout })=>{
 
             <p><strong>Reps: </strong>{workout.reps}</p>
 
-            <p><strong>Created At: </strong>{workout.createdAt}</p>
+            <p><strong>Created At: </strong>{formatDistanceToNow(new Date(workout.createdAt) , { addSuffix: true })}</p>
 
             <div className="workout-actions">
 
