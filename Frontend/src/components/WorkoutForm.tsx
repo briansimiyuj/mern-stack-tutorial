@@ -24,7 +24,7 @@ const WorkoutForm: React.FC = ()=>{
 
             <input
                type="number"
-               value={load}
+               value={load ?? ''}
                onChange={e => setLoad(Number(e.target.value))}
             />
 
@@ -32,7 +32,7 @@ const WorkoutForm: React.FC = ()=>{
 
             <input
                type="number"
-               value={reps}
+               value={reps ?? ''}
                onChange={e => setReps(Number(e.target.value))}
             />
 

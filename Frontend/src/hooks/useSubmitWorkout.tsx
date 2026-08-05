@@ -8,6 +8,14 @@ export const useSubmitWorkout = () =>{
     
         e.preventDefault()
 
+        if(!title || !reps || !load){
+
+            setError('Please fill in all fields')
+
+            return
+            
+        }
+
         const workout = { title, reps, load },
                 response = await fetch("http://localhost:4000/api/workouts/create", {
 
