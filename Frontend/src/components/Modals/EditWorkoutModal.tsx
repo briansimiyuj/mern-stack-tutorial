@@ -31,7 +31,7 @@ const EditWorkoutModal: React.FC = ()=>{
 
                     <input 
                         type="number" 
-                        value={load || selectedWorkout.load} 
+                        value={load ?? selectedWorkout.load} 
                         onChange={e => setLoad(Number(e.target.value))}
                     />
 
@@ -39,7 +39,7 @@ const EditWorkoutModal: React.FC = ()=>{
 
                     <input 
                         type="number" 
-                        value={reps || selectedWorkout.reps} 
+                        value={reps ?? selectedWorkout.reps} 
                         onChange={e => setReps(Number(e.target.value))}
                     />
 
