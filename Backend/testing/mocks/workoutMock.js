@@ -3,10 +3,10 @@ import { vi } from "vitest"
 const mockWorkoutModel ={
 
     find: vi.fn(),
-    findByID: vi.fn(),
+    findById: vi.fn(),
     create: vi.fn(),
-    findByIDAndUpdate: vi.fn(),
-    findByIDAndDelete: vi.fn()
+    findByIdAndUpdate: vi.fn(),
+    findByIdAndDelete: vi.fn()
 
 }
 
@@ -20,7 +20,7 @@ const mockMongoose ={
 
     Types:{
 
-        ObjectID: mockObjectID
+        ObjectId: mockObjectID
 
     }
 
@@ -60,4 +60,4 @@ const resetMocks = () =>{
 
 }
 
-export { mockWorkoutModel, mockMongoose, sampleWorkouts, sampleWorkout, validID, invalidID, resetMocks }
+export { mockWorkoutModel, mockMongoose, sampleWorkouts, sampleWorkout, validID, invalidID, resetMocks, mockObjectID }
