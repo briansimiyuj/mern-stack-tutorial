@@ -1,6 +1,20 @@
 import { beforeEach, describe, expect, it, test, vi } from "vitest"
-import { mockWorkoutModel, resetMocks, sampleWorkouts } from "./mocks/workoutMock.js"
-import { getWorkouts } from "../controllers/workoutController"
+import { mockMongoose, mockObjectID, mockWorkoutModel, resetMocks, sampleWorkout, sampleWorkouts, validID } from "./mocks/workoutMock.js"
+import { getSingleWorkout, getWorkouts } from "../controllers/workoutController.js"
+
+vi.mock("mongoose", () => ({
+
+    default: mockMongoose,
+    ...mockMongoose,
+    Types: {
+
+        ...mockMongoose.Types,
+        ObjectId: mockObjectID,
+        ObjectID: mockObjectID
+
+    }
+
+}))
 
 vi.mock("../models/Workout.js", () =>({
 
@@ -66,3 +80,48 @@ describe("test workout", () =>{
 
 
 }) 
+
+describe("test getSingleWorkout", () =>{
+
+    let req, res
+
+    beforeEach(() =>{
+
+        req = { params: {} }
+        res ={
+
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn().mockReturnThis()
+
+        }
+
+        resetMocks()
+
+    })
+
+    test("should return a workout when it exists", async () =>{
+
+        req.params.id = validID
+
+        mockObjectID.isValid.mockReturnValue(true)      
+
+        mockWorkoutModel.findById.mockResolvedValue(sampleWorkout)
+
+        console.log('mockWorkoutModel.findById:', mockWorkoutModel.findById)
+
+        await getSingleWorkout(req, res)
+
+        console.log('findById calls:', mockWorkoutModel.findById.mock.calls)
+        
+
+        expect(mockObjectID.isValid).toHaveBeenCalledWith(req.params.id)
+
+        expect(mockWorkoutModel.findById).toHaveBeenCalledWith(req.params.id)
+
+        expect(res.status).toHaveBeenCalledWith(200)
+
+        expect(res.json).toHaveBeenCalledWith(sampleWorkout)
+
+    })
+
+})
