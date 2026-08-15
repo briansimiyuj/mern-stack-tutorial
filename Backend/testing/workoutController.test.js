@@ -1,0 +1,49 @@
+import { beforeEach, describe, expect, it, test, vi } from "vitest"
+import { mockWorkoutModel, resetMocks, sampleWorkouts } from "./mocks/workoutMock.js"
+import { getWorkouts } from "../controllers/workoutController"
+
+vi.mock("../models/Workout.js", () =>({
+
+    default: mockWorkoutModel
+
+}))
+
+describe("test workout", () =>{
+
+    let req, res
+
+    beforeEach(() =>{
+
+        req = {}
+        res ={
+
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn().mockReturnThis()
+
+        }
+
+        resetMocks()
+        
+    })
+
+    test("should return all workouts when they exist", async () =>{
+
+        mockWorkoutModel.find.mockReturnValue({
+
+            sort: vi.fn().mockResolvedValue(sampleWorkouts)
+
+        })
+
+        await getWorkouts(req, res)
+
+        expect(mockWorkoutModel.find).toHaveBeenCalled()
+
+        expect(mockWorkoutModel.find().sort).toHaveBeenCalledWith({ createdAt: -1 })
+
+        expect(res.status).toHaveBeenCalledWith(200)
+
+        expect(res.json).toHaveBeenCalledWith(sampleWorkouts)
+
+    })
+
+}) 
