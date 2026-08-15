@@ -46,4 +46,23 @@ describe("test workout", () =>{
 
     })
 
+    test("should return a 404 error when no workouts exist", async () =>{
+
+        mockWorkoutModel.find.mockReturnValue({
+
+            sort: vi.fn().mockResolvedValue(null)
+
+        })
+
+        await getWorkouts(req, res)
+
+        expect(mockWorkoutModel.find).toHaveBeenCalled()
+
+        expect(res.status).toHaveBeenCalledWith(404)
+
+        expect(res.json).toHaveBeenCalledWith({ message: "No workouts found" })
+
+    })
+
+
 }) 
