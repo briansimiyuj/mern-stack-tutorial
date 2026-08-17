@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, test, vi } from "vitest"
 import { invalidID, mockMongoose, mockObjectID, mockWorkoutModel, resetMocks, sampleWorkout, sampleWorkouts, validID } from "./mocks/workoutMock.js"
-import { createWorkout, deleteWorkout, getSingleWorkout, getWorkouts } from "../controllers/workoutController.js"
+import { createWorkout, deleteWorkout, getSingleWorkout, getWorkouts, updateWorkout } from "../controllers/workoutController.js"
 
 vi.mock("mongoose", () => ({
 
@@ -289,4 +289,60 @@ describe("delete workout", () =>{
 
     })
     
+})
+
+describe("update workout", () =>{
+
+    let req, res
+
+    beforeEach(() =>{
+
+        req = { params: {}, body: {} }
+        res ={
+
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn().mockReturnThis()
+
+        }
+
+        resetMocks()
+
+    })
+
+    test("should update a workout when valid id and data is provided", async() =>{
+    
+        const updatedData = { title: "Updated workout", reps: 30, load: 10 },
+              mockUpdateWorkout = { _id: validID, ...updatedData }
+
+        req.params.id = validID
+
+        req.body = updatedData
+
+        mockObjectID.isValid.mockReturnValue(true)
+
+        mockWorkoutModel.findByIdAndUpdate.mockResolvedValue(mockUpdateWorkout)
+
+        await updateWorkout(req, res)
+
+        expect(mockObjectID.isValid).toHaveBeenCalledWith(req.params.id)
+
+        expect(mockWorkoutModel.findByIdAndUpdate).toHaveBeenCalledWith(
+
+            req.params.id,
+            updatedData,
+            { new: true }
+
+        )
+
+        expect(res.status).toHaveBeenCalledWith(200)
+
+        expect(res.json).toHaveBeenCalledWith({
+
+            message: "Workout updated successfully",
+            workout: mockUpdateWorkout
+            
+        })
+    
+    })
+
 })
