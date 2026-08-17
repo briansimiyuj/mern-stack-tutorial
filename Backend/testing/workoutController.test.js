@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, test, vi } from "vitest"
 import { mockMongoose, mockObjectID, mockWorkoutModel, resetMocks, sampleWorkout, sampleWorkouts, validID } from "./mocks/workoutMock.js"
-import { createWorkout, getSingleWorkout, getWorkouts } from "../controllers/workoutController.js"
+import { createWorkout, deleteWorkout, getSingleWorkout, getWorkouts } from "../controllers/workoutController.js"
 
 vi.mock("mongoose", () => ({
 
@@ -201,4 +201,50 @@ describe("create workout", () =>{
     
     })
 
+})
+
+describe("delete workout", () =>{
+
+    let req, res
+
+    beforeEach(() =>{
+
+        req = { params: {} }
+        res ={
+
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn().mockReturnThis()
+
+        }
+
+        resetMocks()
+
+    })
+
+    test("should delete a workout when it exists", async () =>{
+
+        req.params.id = validID
+
+        mockObjectID.isValid.mockReturnValue(true)      
+
+        mockWorkoutModel.findByIdAndDelete.mockResolvedValue(sampleWorkout)
+
+        await deleteWorkout(req, res)
+
+        expect(mockObjectID.isValid).toHaveBeenCalledWith(req.params.id)
+
+        expect(mockWorkoutModel.findByIdAndDelete).toHaveBeenCalledWith(req.params.id)
+
+        expect(res.status).toHaveBeenCalledWith(200)
+
+        expect(res.json).toHaveBeenCalledWith({
+
+
+            message: "Workout deleted successfully",
+            workout: sampleWorkout
+
+        })
+
+    })
+    
 })
