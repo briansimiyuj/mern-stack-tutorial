@@ -361,4 +361,22 @@ describe("update workout", () =>{
 
     })
 
+    test("should return a 400 error when database error occurs", async() =>{
+
+        const updatedData = { title: "Updated workout", reps: 30, load: 10 }
+
+        req.params.id = validID
+
+        req.body = updatedData
+
+        await updateWorkout(req, res)
+
+        const error = new Error("Database connection failed")
+
+        mockObjectID.isValid.mockReturnValue(true)
+
+        mockWorkoutModel.findByIdAndUpdate.mockRejectedValue(error)
+
+    })
+
 })
