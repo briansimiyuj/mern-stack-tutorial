@@ -163,4 +163,23 @@ describe("create workout", () =>{
     
     })
 
+    test("should create a workout when all fields are filled", async() =>{
+    
+        const newWorkout = { title: "Squats", reps: 20, load: 5 },
+              createdWorkout = { ...newWorkout, _id: "3" }
+
+        req.body = newWorkout
+
+        mockWorkoutModel.create.mockResolvedValue(createdWorkout)
+
+        await createWorkout(req, res)
+
+        expect(mockWorkoutModel.create).toHaveBeenCalledWith(newWorkout)
+
+        expect(res.status).toHaveBeenCalledWith(201)
+
+        expect(res.json).toHaveBeenCalledWith(createdWorkout)
+    
+    })
+
 })
