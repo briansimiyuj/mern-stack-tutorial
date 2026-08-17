@@ -266,5 +266,27 @@ describe("delete workout", () =>{
         expect(mockWorkoutModel.findByIdAndDelete).not.toHaveBeenCalled()
 
     })
+
+    test("should return a 400 error when database error occurs", async () =>{
+
+        req.params.id = validID
+        
+        const error = new Error("Database connection failed")
+
+        mockObjectID.isValid.mockReturnValue(true)
+
+        mockWorkoutModel.findByIdAndDelete.mockRejectedValue(error)
+
+        await deleteWorkout(req, res)
+
+        expect(mockObjectID.isValid).toHaveBeenCalledWith(req.params.id)
+
+        expect(mockWorkoutModel.findByIdAndDelete).toHaveBeenCalledWith(req.params.id)
+
+        expect(res.status).toHaveBeenCalledWith(400)
+
+        expect(res.json).toHaveBeenCalledWith({ error: error.message })
+
+    })
     
 })
