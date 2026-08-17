@@ -345,4 +345,20 @@ describe("update workout", () =>{
     
     })
 
+    test("should return a 404 error when workout does not exist", async() =>{
+
+        const updatedData = { title: "Updated workout", reps: 30, load: 10 }
+
+        req.params.id = invalidID
+
+        req.body = updatedData
+
+        await updateWorkout(req, res)
+
+        mockObjectID.isValid.mockReturnValue(false)
+
+        mockWorkoutModel.findByIdAndUpdate.mockResolvedValue(null)
+
+    })
+
 })
