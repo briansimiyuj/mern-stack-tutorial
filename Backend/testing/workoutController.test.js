@@ -182,4 +182,23 @@ describe("create workout", () =>{
     
     })
 
+    test("should return a 400 error when database error occurs", async() =>{
+    
+        const newWorkout = { title: "Squats", reps: 20, load: 5 },
+              error = new Error("Database connection failed")
+
+        req.body = newWorkout
+
+        mockWorkoutModel.create.mockRejectedValue(error)
+
+        await createWorkout(req, res)
+
+        expect(mockWorkoutModel.create).toHaveBeenCalledWith(newWorkout)
+
+        expect(res.status).toHaveBeenCalledWith(400)
+
+        expect(res.json).toHaveBeenCalledWith({ error: error.message })
+    
+    })
+
 })
