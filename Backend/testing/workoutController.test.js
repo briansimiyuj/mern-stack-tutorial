@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, test, vi } from "vitest"
 import { mockMongoose, mockObjectID, mockWorkoutModel, resetMocks, sampleWorkout, sampleWorkouts, validID } from "./mocks/workoutMock.js"
-import { getSingleWorkout, getWorkouts } from "../controllers/workoutController.js"
+import { createWorkout, getSingleWorkout, getWorkouts } from "../controllers/workoutController.js"
 
 vi.mock("mongoose", () => ({
 
@@ -122,6 +122,45 @@ describe("test getSingleWorkout", () =>{
 
         expect(res.json).toHaveBeenCalledWith(sampleWorkout)
 
+    })
+
+})
+
+describe("create workout", () =>{
+    
+    let req, res
+
+    beforeEach(() =>{
+
+        req = { body: {} }
+        res ={
+
+            status: vi.fn().mockReturnThis(),
+            json: vi.fn().mockReturnThis()
+
+        }
+
+        resetMocks()
+
+    })
+    
+    test("should return a 400 error the title is missing", async() =>{
+    
+        req.body = { reps: 20, load: 5 }
+
+        await createWorkout(req, res)
+
+        expect(res.status).toHaveBeenCalledWith(400)
+
+        expect(res.json).toHaveBeenCalledWith({ 
+
+            error: "Please fill in all fields",
+            emptyFields: ["title"]
+
+        })
+
+        expect(mockWorkoutModel.create).not.toHaveBeenCalled()
+    
     })
 
 })
