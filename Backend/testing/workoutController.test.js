@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, test, vi } from "vitest"
-import { mockMongoose, mockObjectID, mockWorkoutModel, resetMocks, sampleWorkout, sampleWorkouts, validID } from "./mocks/workoutMock.js"
+import { invalidID, mockMongoose, mockObjectID, mockWorkoutModel, resetMocks, sampleWorkout, sampleWorkouts, validID } from "./mocks/workoutMock.js"
 import { createWorkout, deleteWorkout, getSingleWorkout, getWorkouts } from "../controllers/workoutController.js"
 
 vi.mock("mongoose", () => ({
@@ -244,6 +244,26 @@ describe("delete workout", () =>{
             workout: sampleWorkout
 
         })
+
+    })
+
+    test("should return a 404 error when workout does not exist", async () =>{
+
+        req.params.id = invalidID
+
+        mockObjectID.isValid.mockReturnValue(false)      
+
+        mockWorkoutModel.findByIdAndDelete.mockResolvedValue(null)
+
+        await deleteWorkout(req, res)
+
+        expect(mockObjectID.isValid).toHaveBeenCalledWith(req.params.id)
+
+        expect(res.status).toHaveBeenCalledWith(404)
+
+        expect(res.json).toHaveBeenCalledWith({ message: "No workout found" })
+
+        expect(mockWorkoutModel.findByIdAndDelete).not.toHaveBeenCalled()
 
     })
     
