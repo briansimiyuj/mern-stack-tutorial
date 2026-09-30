@@ -1,0 +1,2 @@
+Before saving passwords to the database, we need to hash them using `bcrypt`. To install bcrypt, we run:
+    `npm install bcrypt`    
