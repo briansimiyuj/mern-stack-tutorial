@@ -34,7 +34,7 @@ UserSchema.statics.register = async function(email, password){
     if(!validator.isStrongPassword(password)){
 
         throw Error('Password is not strong enough')
-        
+
     }
     
     const existingUser = await this.findOne({ email })
@@ -50,6 +50,34 @@ UserSchema.statics.register = async function(email, password){
 
     const user = await this.create({ email, password: hash })
 
+    return user
+
+}
+
+UserSchema.statics.login = async function(email, password){
+
+    if(!email || !password){
+
+        throw Error('All fields must be filled')
+
+    }
+
+    const user = await this.findOne({ email })
+
+    if(!user){  
+
+        throw Error('User does not exist')
+
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if(!match){
+
+        throw Error('Incorrect password')
+
+    }
+    
     return user
 
 }
