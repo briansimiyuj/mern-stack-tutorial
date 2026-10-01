@@ -192,3 +192,46 @@ div.error{
 input.error{
   border-color: var(--error);
 }
+
+.auth-form{
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  margin: 40px auto;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.auth-form h2{
+  color: var(--primary);
+  margin-top: 0;
+}
+
+.auth-hint{
+  color: #555;
+  font-size: 0.85em;
+  margin: -10px 0 20px;
+}
+
+.register-page{
+  margin: 40px auto;
+  max-width: 440px;
+}
+
+.register-intro{
+  text-align: center;
+}
+
+.register-intro h2{
+  margin-bottom: 5px;
+}
+
+.register-intro p,
+.auth-notice{
+  color: #555;
+}
+
+.auth-notice{
+  font-size: 0.9em;
+  margin-bottom: 0;
+}

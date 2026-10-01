@@ -14,6 +14,8 @@ const Navbar: React.FC = ()=>{
             
                 </Link>
 
+                <Link to="/register">Register</Link>
+
             </div>
 
         </header>

@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Navbar from "./components/Navbar"
 import { WorkoutContextProvider } from "./context/WorkoutContext"
+import { AuthContextProvider } from "./context/AuthContext"
+import Register from "./pages/Register"
 
 const App: React.FC = ()=>{
 
@@ -9,25 +11,35 @@ const App: React.FC = ()=>{
 
     <div className="app">
     
-      <BrowserRouter>
+        <BrowserRouter>
 
-        <Navbar/>
-      
-        <div className="pages">
+            <AuthContextProvider>
 
-          <WorkoutContextProvider>
-
-            <Routes>
-          
-              <Route path="/" element={<Home/>}/>
-
-            </Routes> 
+                <Navbar/>
             
-          </WorkoutContextProvider>
+                <div className="pages">
 
-        </div>
-      
-      </BrowserRouter>
+                    <WorkoutContextProvider>
+
+                        <Routes>
+                    
+                          <Route path="/" element={<Home/>}/>
+
+                        </Routes> 
+                        
+                    </WorkoutContextProvider>
+
+                    <Routes>
+
+                        <Route path="/register" element={<Register/>}/>
+
+                    </Routes>
+
+                </div>
+
+            </AuthContextProvider>
+        
+        </BrowserRouter>
     
     </div>
 
