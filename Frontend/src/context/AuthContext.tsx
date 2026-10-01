@@ -14,6 +14,8 @@ export const AuthContextProvider:React.FC<AuthContextProviderProps> = ({ childre
     const [email, setEmail] = useState<string>(''),
           [password, setPassword] = useState<string>(''),
           [error, setError] = useState<string | null>(null),
+          [successMessage, setSuccessMessage] = useState<string | null>(null),
+          [isLoading, setIsLoading] = useState<boolean>(false),
           [isAuth, setIsAuth] = useState<boolean>(false)
 
     const contextValue: AuthContextProps ={
@@ -24,6 +26,10 @@ export const AuthContextProvider:React.FC<AuthContextProviderProps> = ({ childre
         setPassword,
         error,
         setError,
+        successMessage,
+        setSuccessMessage,
+        isLoading,
+        setIsLoading,
         isAuth,
         setIsAuth
 
