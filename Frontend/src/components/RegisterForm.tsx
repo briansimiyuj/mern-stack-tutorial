@@ -1,24 +1,16 @@
-import { useState } from "react"
 import { useAuthContext } from "../context/AuthContext"
+import { useSignup } from "../hooks/useSignup"
 
 const RegisterForm: React.FC = ()=>{
 
     const { email, setEmail, password, setPassword } = useAuthContext(),
-          [notice, setNotice] = useState<string | null>(null)
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
-
-        e.preventDefault()
-
-        setNotice('The registration form is ready. Account creation will be connected later.')
-
-    }
+          { handleSignup, successMessage, error, isLoading } = useSignup()
 
     return(
 
         <form
             className="auth-form"
-            onSubmit={handleSubmit}
+            onSubmit={handleSignup}
         >
 
             <label htmlFor="email">Email</label>
@@ -28,10 +20,7 @@ const RegisterForm: React.FC = ()=>{
                 type="email"
                 autoComplete="email"
                 value={email}
-                onChange={e =>{
-                    setEmail(e.target.value)
-                    setNotice(null)
-                }}
+                onChange={e => setEmail(e.target.value)}
                 required
             />
 
@@ -42,25 +31,38 @@ const RegisterForm: React.FC = ()=>{
                 type="password"
                 autoComplete="new-password"
                 value={password}
-                onChange={e =>{
-                    setPassword(e.target.value)
-                    setNotice(null)
-                }}
+                onChange={e => setPassword(e.target.value)}
                 required
             />
 
             <p className="auth-hint">Use a strong password with uppercase and lowercase letters, a number, and a symbol.</p>
 
-            <button type="submit">Register</button>
+            <button
+                type="submit"
+                disabled={isLoading}
+            >{isLoading ? 'Creating account...' : 'Register'}</button>
 
             {
 
-                notice &&(
+                error &&(
+
+                    <div
+                        className="error"
+                        role="alert"
+                    >{error}</div>
+
+                )
+
+            }
+
+            {
+
+                successMessage &&(
 
                     <p
                         className="auth-notice"
                         role="status"
-                    >{notice}</p>
+                    >{successMessage}</p>
 
                 )
 
