@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import bcrypt from "bcrypt"
+import validator from "validator"
 
 const UserSchema = new mongoose.Schema({
     
@@ -17,6 +18,24 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.statics.register = async function(email, password){
+
+    if(!email || !password){
+        
+        throw Error('All fields must be filled')
+
+    }
+
+    if(!validator.isEmail(email)){
+
+        throw Error('Email is not valid')
+
+    }
+
+    if(!validator.isStrongPassword(password)){
+
+        throw Error('Password is not strong enough')
+        
+    }
     
     const existingUser = await this.findOne({ email })
 
