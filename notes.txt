@@ -1,18 +1,4 @@
-We need a way to tell the frontend that a user is logged in, and to tell the backend which resources the user can access.
+To install JSON Web Token, we run:
+    `npm install jsonwebtoken`
 
-This is where JWT (JSON Web Token) comes in. A JWT is a signed token created by the backend and sent to the frontend. The frontend stores it and sends it back with every request. The backend verifies the signature and reads the payload to authenticate (who is the user) and authorize (what can they do).
-
-A JWT has three parts:
-
-    1. Header — the token type (JWT) and signing algorithm (e.g., HS256).
-    2. Payload — claims about the user (e.g., userID, email, exp). This is base64url-encoded, not encrypted, so anyone can read it.
-    3. Signature — an HMAC or RSA signature computed over the header and payload using a secret only the server knows. This proves the token hasn't been tampered with.
-
-The payload must never contain passwords or sensitive information, because it's publicly readable.
-
-The token is constructed as:
-`base64url($header) . base64url($payload) . base64url($signature)`
-
-The secret key is only known to the server, so only the server can create a valid signature. Anyone can read the token, but only the server can verify it.
-
-video #5
+video #6
