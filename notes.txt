@@ -1,4 +1,7 @@
-To install JSON Web Token, we run:
-    `npm install jsonwebtoken`
+To create a token, we need to make `createToken` function which takes `_id` as a parameter.
+
+Inside the `createToken` function, we need to use `jwt.sign` method to create a token. The `jwt.sign` method takes 3 parameters: payload, secret key, and options (expiration time).
+
+After creating the token, we need to call it in the `register` function and send it back to the client.
 
 video #6

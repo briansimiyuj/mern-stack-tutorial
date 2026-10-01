@@ -1,3 +1,4 @@
+import createToken from "../middlewares/createToken.js"
 import User from "../models/User.js"
 
 const logiUser = async(req, res) =>{
@@ -12,9 +13,10 @@ const registerUser = async(req, res) =>{
 
     try{
 
-        const user = await User.register(email, password)
+        const user = await User.register(email, password),
+              token = createToken(user._id)
 
-        res.status(201).json({ email: user.email, user })
+        res.status(201).json({ email: user.email, token })
 
     }catch(err){
 
