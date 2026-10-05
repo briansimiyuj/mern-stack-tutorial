@@ -4,13 +4,21 @@ import { useSignup } from "../hooks/useSignup"
 const RegisterForm: React.FC = ()=>{
 
     const { email, setEmail, password, setPassword } = useAuthContext(),
-          { handleSignup, successMessage, error, isLoading } = useSignup()
+          { signUp, successMessage, error, isLoading } = useSignup()
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
+
+        e.preventDefault()
+
+        signUp(email, password)
+
+    }
 
     return(
 
         <form
             className="auth-form"
-            onSubmit={handleSignup}
+            onSubmit={handleSubmit}
         >
 
             <label htmlFor="email">Email</label>

@@ -1,3 +1,5 @@
+import type { AuthUser } from "../types/AuthUser"
+
 export interface AuthContextProps{
 
     email: string
@@ -10,6 +12,8 @@ export interface AuthContextProps{
     setSuccessMessage: (message: string | null) => void
     isLoading: boolean
     setIsLoading: (isLoading: boolean) => void
+    authUser: AuthUser | null
+    updateAuthUser: (authUser: AuthUser | null) => void
     isAuth: boolean
     setIsAuth: (isAuth: boolean) => void
 

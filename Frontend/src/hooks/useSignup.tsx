@@ -1,21 +1,13 @@
 import { useNavigate } from "react-router-dom"
 import { useAuthContext } from "../context/AuthContext"
-
-interface SignupResponse{
-
-    email?: string
-    message?: string
-
-}
+import type { AuthUser, SignupResponse } from "../assets/types/AuthUser"
 
 export const useSignup = ()=>{
 
-    const { email, password, setEmail, setPassword, error, setError, successMessage, setSuccessMessage, isLoading, setIsLoading } = useAuthContext(),
+    const { setEmail, setPassword, error, setError, successMessage, setSuccessMessage, isLoading, setIsLoading, updateAuthUser } = useAuthContext(),
           navigate = useNavigate()
 
-    const handleSignup = async(e: React.SubmitEvent<HTMLFormElement>) =>{
-
-        e.preventDefault()
+    const signUp = async(email: string, password: string) =>{
 
         setError(null)
 
@@ -25,10 +17,19 @@ export const useSignup = ()=>{
 
         try{
 
+            if(!password || !email){
+
+                setError('Password and email are required')
+
+                return
+
+            }
+
             const response = await fetch("http://localhost:4000/api/user/register", {
 
                 method: "POST",
                 headers:{ "Content-Type": "application/json" },
+                credentials: "include",                
                 body: JSON.stringify({ email, password })
 
             }),
@@ -42,7 +43,22 @@ export const useSignup = ()=>{
 
             }
 
-            setEmail(data.email ?? email)
+            if(!data.email || !data.token){
+
+                throw new Error('The server returned an invalid registration response.')
+
+            }
+
+            const user: AuthUser ={
+
+                email: data.email,
+                token: data.token
+
+            }
+
+            updateAuthUser(user)
+
+            setEmail(user.email)
 
             setPassword('')
 
@@ -66,6 +82,6 @@ export const useSignup = ()=>{
 
     }
 
-    return { handleSignup, successMessage, error, isLoading }
+    return { signUp, successMessage, error, isLoading }
 
 }

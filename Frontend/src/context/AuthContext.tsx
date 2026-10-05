@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react"
 import type { AuthContextProps } from "../assets/contextProps/AuthContextProps"
+import type { AuthUser } from "../assets/types/AuthUser"
 
 interface AuthContextProviderProps{
 
@@ -16,7 +17,16 @@ export const AuthContextProvider:React.FC<AuthContextProviderProps> = ({ childre
           [error, setError] = useState<string | null>(null),
           [successMessage, setSuccessMessage] = useState<string | null>(null),
           [isLoading, setIsLoading] = useState<boolean>(false),
+          [authUser, setAuthUser] = useState<AuthUser | null>(null),
           [isAuth, setIsAuth] = useState<boolean>(false)
+
+    const updateAuthUser = (user: AuthUser | null) =>{
+
+        setAuthUser(user)
+
+        setIsAuth(Boolean(user))
+
+    }
 
     const contextValue: AuthContextProps ={
 
@@ -30,6 +40,8 @@ export const AuthContextProvider:React.FC<AuthContextProviderProps> = ({ childre
         setSuccessMessage,
         isLoading,
         setIsLoading,
+        authUser,
+        updateAuthUser,
         isAuth,
         setIsAuth
 
