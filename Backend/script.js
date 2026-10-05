@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors"
+import cookieParser from "cookie-parser"
 import workoutRoute from "./routes/workoutRoute.js"
 import connectDB from "./config/DBConnect.js"
 import userRoute from "./routes/userRoute.js"
@@ -15,6 +16,8 @@ app.use(cors({
 }))
 
 app.use(express.json()) 
+
+app.use(cookieParser())
 
 connectDB()
 
