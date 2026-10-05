@@ -27,7 +27,14 @@ const registerUser = async(req, res) =>{
     try{
 
         const user = await User.register(email, password),
-              token = createToken(user._id)
+              token = createToken(user._id) 
+            
+        res.cookie("token", token, {
+
+            httpOnly: true,
+            maxAge: 3 * 24 * 60 * 60 * 1000,
+    
+        })
 
         res.status(201).json({ email: user.email, token })
 
