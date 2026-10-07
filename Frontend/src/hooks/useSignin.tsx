@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom"
 import { useAuthContext } from "../context/AuthContext"
+import type { AuthUser, SignupResponse } from "../assets/types/AuthUser"
 
 export const useSignin = ()=>{
 
-    const { setError, setSuccessMessage, setIsLoading } = useAuthContext()
+    const { setEmail, setPassword, setError, setSuccessMessage, setIsLoading, updateAuthUser } = useAuthContext(),
+          navigate = useNavigate()
 
     const signIn = async(email: string, password: string) =>{
 
@@ -22,11 +25,50 @@ export const useSignin = ()=>{
 
             }
 
-            console.log('Sign-in email:', email)
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/login`, {
 
-            console.log('Sign-in password:', '*'.repeat(password.length))
+                method: "POST",
+                headers:{ "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ email, password })
 
-            setSuccessMessage('Sign-in UI is ready. Connect the backend to authenticate your account.')
+            }),
+                  data: SignupResponse = await response.json()
+
+            if(!response.ok){
+
+                setError(data.message ?? 'Unable to sign in. Please check your details and try again.')
+
+                return
+
+            }
+
+            if(!data.email || !data.token){
+
+                throw new Error('The server returned an invalid sign-in response.')
+
+            }
+
+            const user: AuthUser ={
+
+                email: data.email,
+                token: data.token
+
+            }
+
+            updateAuthUser(user)
+
+            setEmail(user.email)
+
+            setPassword('')
+
+            setSuccessMessage('You have signed in successfully.')
+
+            setTimeout(()=>{
+
+                navigate("/")
+
+            }, 1500)
 
         }catch(error){
 
