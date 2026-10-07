@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar"
 import { WorkoutContextProvider } from "./context/WorkoutContext"
 import { AuthContextProvider } from "./context/AuthContext"
 import Register from "./pages/Register"
+import SignIn from "./pages/SignIn"
 
 const App: React.FC = ()=>{
 
@@ -32,6 +33,8 @@ const App: React.FC = ()=>{
                     <Routes>
 
                         <Route path="/register" element={<Register/>}/>
+
+                        <Route path="/signin" element={<SignIn/>}/>
 
                     </Routes>
 

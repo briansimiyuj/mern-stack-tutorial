@@ -213,7 +213,8 @@ input.error{
   margin: -10px 0 20px;
 }
 
-.register-page{
+.register-page,
+.signin-page{
   margin: 40px auto;
   max-width: 440px;
 }
