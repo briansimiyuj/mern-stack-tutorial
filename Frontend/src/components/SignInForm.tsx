@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom"
 import { useAuthContext } from "../context/AuthContext"
+import { useSignin } from "../hooks/useSignin"
 
 const SignInForm: React.FC = ()=>{
 
-    const { email, setEmail, password, setPassword } = useAuthContext()
+    const { email, setEmail, password, setPassword, error, successMessage, isLoading } = useAuthContext(),
+          { signIn } = useSignin()
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) =>{
 
         e.preventDefault()
+
+        signIn(email, password)
 
     }
 
@@ -40,7 +44,36 @@ const SignInForm: React.FC = ()=>{
                 required
             />
 
-            <button type="submit">Sign In</button>
+            <button
+                type="submit"
+                disabled={isLoading}
+            >{isLoading ? 'Signing in...' : 'Sign In'}</button>
+
+            {
+
+                error &&(
+
+                    <div
+                        className="error"
+                        role="alert"
+                    >{error}</div>
+
+                )
+
+            }
+
+            {
+
+                successMessage &&(
+
+                    <p
+                        className="auth-notice"
+                        role="status"
+                    >{successMessage}</p>
+
+                )
+
+            }
 
             <p className="auth-notice">
                 
