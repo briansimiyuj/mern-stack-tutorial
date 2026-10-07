@@ -10,6 +10,13 @@ const logiUser = async(req, res) =>{
         const user = await User.login(email, password),
               token = createToken(user._id)
 
+        res.cookie("token", token, {
+
+            httpOnly: true,
+            maxAge: 3 * 24 * 60 * 60 * 1000
+
+        })
+
         res.status(200).json({ email: user.email, token })
 
     }catch(err){
