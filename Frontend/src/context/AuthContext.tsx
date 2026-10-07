@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import type { AuthContextProps } from "../assets/contextProps/AuthContextProps"
 import type { AuthUser } from "../assets/types/AuthUser"
 
@@ -27,6 +27,47 @@ export const AuthContextProvider:React.FC<AuthContextProviderProps> = ({ childre
         setIsAuth(Boolean(user))
 
     }
+
+    useEffect(() =>{
+
+        const checkAuthentication = async() =>{
+
+            try{
+
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/me`, {
+
+                    credentials: "include"
+
+                }),
+                    user = await response.json() as { user: AuthUser | null }
+
+                if(!response.ok || !user.user){
+
+                    setAuthUser(null)
+
+                    setIsAuth(false)
+
+                    return
+
+                }
+
+                setAuthUser(user.user)
+
+                setIsAuth(true)
+
+            }catch(error){
+
+                setAuthUser(null)
+
+                setIsAuth(false)
+
+            }
+
+        }
+
+        checkAuthentication()
+
+    }, [])
 
     const contextValue: AuthContextProps ={
 
