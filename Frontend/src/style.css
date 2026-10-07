@@ -235,3 +235,8 @@ input.error{
   font-size: 0.9em;
   margin-bottom: 0;
 }
+
+.auth-links{
+  display: flex;
+  gap: 2rem;
+}
