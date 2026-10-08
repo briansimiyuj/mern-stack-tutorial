@@ -4,7 +4,7 @@ import type { AuthUser, SignupResponse } from "../assets/types/AuthUser"
 
 export const useSignup = ()=>{
 
-    const { setEmail, setPassword, error, setError, successMessage, setSuccessMessage, isLoading, setIsLoading, updateAuthUser } = useAuthContext(),
+    const { setPassword, error, setError, successMessage, setSuccessMessage, isLoading, setIsLoading, updateAuthUser } = useAuthContext(),
           navigate = useNavigate()
 
     const signUp = async(email: string, password: string) =>{
@@ -57,8 +57,6 @@ export const useSignup = ()=>{
             }
 
             updateAuthUser(user)
-
-            setEmail(user.email)
 
             setPassword('')
 
