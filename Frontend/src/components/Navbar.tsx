@@ -4,7 +4,7 @@ import { useSignout } from "../hooks/useSignout"
 
 const Navbar: React.FC = ()=>{
 
-    const { isAuth } = useAuthContext(),
+    const { isAuth, authUser } = useAuthContext(),
           { signOut } = useSignout()
 
     return(
@@ -22,12 +22,18 @@ const Navbar: React.FC = ()=>{
                 {
                 
                     isAuth ?(
+
+                        <div className="auth-info">
+
+                            <p>{authUser?.email}</p>
                 
-                        <button
-                            className="signout-button"
-                            onClick={signOut}
-                            type="button"
-                        >Sign Out</button>
+                            <button
+                                className="signout-button"
+                                onClick={signOut}
+                                type="button"
+                            >Sign Out</button>
+
+                        </div>
                 
                     ):(
                 

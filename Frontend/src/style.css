@@ -221,6 +221,11 @@ input.error{
   margin: -10px 0 20px;
 }
 
+.auth-info{
+  display: flex;
+  flex-flow: column;
+}
+
 .register-page,
 .signin-page{
   margin: 40px auto;
