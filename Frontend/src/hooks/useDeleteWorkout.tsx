@@ -1,16 +1,27 @@
+import { useAuthContext } from "../context/AuthContext"
 import { useWorkoutContext } from "../context/WorkoutContext"
 
 export const useDeleteWorkout = () =>{
 
-    const { selectedWorkout, setError, closeModal } = useWorkoutContext()
+    const { selectedWorkout, setError, closeModal } = useWorkoutContext(),
+         { authUser } = useAuthContext()
 
     const handleDelete = async() =>{
+
+        if(!authUser?.token){
+
+            setError('You must be logged in to delete a workout.')
+
+            return
+
+        }
 
         if(!selectedWorkout) return
 
         const response = await fetch(`http://localhost:4000/api/workouts/${selectedWorkout._id}`, {
 
-            method: "DELETE"
+            method: "DELETE",
+            credentials: "include"
 
         }),
         data = await response.json()
