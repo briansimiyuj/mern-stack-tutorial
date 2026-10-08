@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom"
 import { useAuthContext } from "../context/AuthContext"
+import { useSignout } from "../hooks/useSignout"
 
 const Navbar: React.FC = ()=>{
 
-    const { isAuth } = useAuthContext()
+    const { isAuth } = useAuthContext(),
+          { signOut } = useSignout()
 
     return(
 
@@ -21,7 +23,11 @@ const Navbar: React.FC = ()=>{
                 
                     isAuth ?(
                 
-                        <Link to="/signout">Sign Out</Link>
+                        <button
+                            className="signout-button"
+                            onClick={signOut}
+                            type="button"
+                        >Sign Out</button>
                 
                     ):(
                 
