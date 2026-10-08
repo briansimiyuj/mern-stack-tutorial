@@ -1,5 +1,5 @@
 import express from "express"
-import { logiUser, registerUser } from "../controllers/userController.js"
+import { logiUser, logOutUser, registerUser } from "../controllers/userController.js"
 import verifyToken from "../middlewares/verifyToken.js"
 import User from "../models/User.js"
 
@@ -8,6 +8,8 @@ const userRoute = express.Router()
 userRoute.post("/login", logiUser)
 
 userRoute.post("/register", registerUser)
+
+userRoute.post("/logout", verifyToken, logOutUser)
 
 userRoute.get("/me", verifyToken, async(req, res) =>{
 
