@@ -5,48 +5,52 @@ import { WorkoutContextProvider } from "./context/WorkoutContext"
 import { AuthContextProvider } from "./context/AuthContext"
 import Register from "./pages/Register"
 import SignIn from "./pages/SignIn"
+import PrivateRoute from "./components/PrivateRoute"
 
 const App: React.FC = ()=>{
 
-  return(
+    return(
 
-    <div className="app">
+        <div className="app">
     
-        <BrowserRouter>
+            <BrowserRouter>
 
-            <AuthContextProvider>
+                <AuthContextProvider>
 
-                <Navbar/>
+                    <Navbar/>
             
-                <div className="pages">
-
-                    <WorkoutContextProvider>
+                    <div className="pages">
 
                         <Routes>
-                    
-                          <Route path="/" element={<Home/>}/>
 
-                        </Routes> 
-                        
-                    </WorkoutContextProvider>
+                            <Route element={<PrivateRoute/>}>
 
-                    <Routes>
+                                <Route
+                                    path="/"
+                                    element={
+                                        <WorkoutContextProvider>
+                                            <Home/>
+                                        </WorkoutContextProvider>
+                                    }
+                                />
 
-                        <Route path="/register" element={<Register/>}/>
+                            </Route>
 
-                        <Route path="/signin" element={<SignIn/>}/>
+                            <Route path="/register" element={<Register/>}/>
 
-                    </Routes>
+                            <Route path="/signin" element={<SignIn/>}/>
 
-                </div>
+                        </Routes>
 
-            </AuthContextProvider>
+                    </div>
+
+                </AuthContextProvider>
         
-        </BrowserRouter>
+            </BrowserRouter>
     
-    </div>
+        </div>
 
-  )
+    )
 
 }
 

@@ -245,6 +245,12 @@ input.error{
   color: #555;
 }
 
+.auth-check-message{
+  color: #555;
+  margin: 40px auto;
+  text-align: center;
+}
+
 .auth-notice{
   font-size: 0.9em;
   margin-bottom: 0;

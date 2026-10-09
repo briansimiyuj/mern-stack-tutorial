@@ -1,6 +1,29 @@
+import { Navigate } from "react-router-dom"
 import SignInForm from "../components/SignInForm"
+import { useAuthContext } from "../context/AuthContext"
 
 const SignIn: React.FC = ()=>{
+
+    const { isAuth, isAuthChecking } = useAuthContext()
+
+    if(isAuthChecking){
+
+        return(
+
+            <p
+                className="auth-check-message"
+                role="status"
+            >Checking your session...</p>
+
+        )
+
+    }
+
+    if(isAuth){
+
+        return <Navigate to="/" replace/>
+
+    }
 
     return(
 
