@@ -16,5 +16,6 @@ export interface AuthContextProps{
     updateAuthUser: (authUser: AuthUser | null) => void
     isAuth: boolean
     setIsAuth: (isAuth: boolean) => void
+    isAuthChecking: boolean
 
 }

@@ -18,7 +18,8 @@ export const AuthContextProvider:React.FC<AuthContextProviderProps> = ({ childre
           [successMessage, setSuccessMessage] = useState<string | null>(null),
           [isLoading, setIsLoading] = useState<boolean>(false),
           [authUser, setAuthUser] = useState<AuthUser | null>(null),
-          [isAuth, setIsAuth] = useState<boolean>(false)
+          [isAuth, setIsAuth] = useState<boolean>(false),
+          [isAuthChecking, setIsAuthChecking] = useState<boolean>(true)
 
     const updateAuthUser = (user: AuthUser | null) =>{
 
@@ -61,6 +62,10 @@ export const AuthContextProvider:React.FC<AuthContextProviderProps> = ({ childre
 
                 setIsAuth(false)
 
+            }finally{
+
+                setIsAuthChecking(false)
+
             }
 
         }
@@ -84,7 +89,8 @@ export const AuthContextProvider:React.FC<AuthContextProviderProps> = ({ childre
         authUser,
         updateAuthUser,
         isAuth,
-        setIsAuth
+        setIsAuth,
+        isAuthChecking
 
     }
 
