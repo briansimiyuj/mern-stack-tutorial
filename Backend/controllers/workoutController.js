@@ -64,7 +64,8 @@ const getSingleWorkout = async(req, res) =>{
 
 const createWorkout = async(req, res) =>{
 
-    const { title, reps, load } = req.body
+    const { title, reps, load } = req.body,
+          user = req.user._id
 
     let emptyFields = []
 
@@ -94,7 +95,7 @@ const createWorkout = async(req, res) =>{
 
     try{
     
-        const workout = await Workout.create({ title, reps, load })
+        const workout = await Workout.create({ title, reps, load, user })
 
         res.status(201).json(workout)
     
