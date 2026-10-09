@@ -4,11 +4,11 @@ import verifyToken from "../middlewares/verifyToken.js"
 
 const workoutRoute = express.Router()
 
+workoutRoute.use(verifyToken)
+
 workoutRoute.get("/", getWorkouts)
 
 workoutRoute.get("/:id", getSingleWorkout)
-
-workoutRoute.use(verifyToken)
 
 workoutRoute.delete("/:id", deleteWorkout)
 

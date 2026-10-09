@@ -5,7 +5,7 @@ const getWorkouts = async(req, res) =>{
 
     try{
     
-        const workouts = await Workout.find().sort({ createdAt: -1 })
+        const workouts = await Workout.find({ user: req.user._id }).sort({ createdAt: -1 })
 
         if(workouts){
             
