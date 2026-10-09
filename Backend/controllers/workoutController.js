@@ -121,7 +121,7 @@ const deleteWorkout = async(req, res) =>{
 
         }
     
-        const workout = await Workout.findByIdAndDelete(id)
+        const workout = await Workout.findOneAndDelete({ _id: id, user: req.user._id })
 
         if(!workout){
 
