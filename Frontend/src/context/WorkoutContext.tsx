@@ -27,8 +27,12 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
         
         const fetchWorkout = async() =>{
         
-            const response = await fetch("http://localhost:4000/api/workouts"),
-                    data = await response.json()
+            const response = await fetch("http://localhost:4000/api/workouts", {
+
+                    credentials: 'include'
+
+                }),
+                  data = await response.json()
         
             if(response.ok){
                 
@@ -44,7 +48,11 @@ export const WorkoutContextProvider:React.FC<WorkoutContextProviderProps> = ({ c
 
     const fetchSingleWorkout = async(ID: string): Promise<WorkoutType | null> =>{
     
-        const response = await fetch(`http://localhost:4000/api/workouts/${ID}`),
+        const response = await fetch(`http://localhost:4000/api/workouts/${ID}`, {
+
+                credentials: 'include'
+
+            }),
               data = await response.json()
 
         if(response.ok){

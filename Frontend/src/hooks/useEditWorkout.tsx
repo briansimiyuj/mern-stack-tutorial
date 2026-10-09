@@ -10,7 +10,7 @@ export const useEditWorkout = () =>{
     
         e.preventDefault()
 
-        if(!authUser?.token){
+        if(!authUser){
 
             setError('You must be logged in to edit a workout.')
 

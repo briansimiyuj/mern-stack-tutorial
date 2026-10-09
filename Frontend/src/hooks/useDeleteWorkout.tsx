@@ -8,7 +8,7 @@ export const useDeleteWorkout = () =>{
 
     const handleDelete = async() =>{
 
-        if(!authUser?.token){
+        if(!authUser){
 
             setError('You must be logged in to delete a workout.')
 

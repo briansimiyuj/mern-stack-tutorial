@@ -10,7 +10,7 @@ export const useSubmitWorkout = () =>{
     
         e.preventDefault()
 
-        if(!authUser?.token){
+        if(!authUser){
 
             setError('You must be logged in to submit a workout.')
          
@@ -36,7 +36,7 @@ export const useSubmitWorkout = () =>{
 
             setError(data.error)
 
-            setEmptyFields(data.emptyFields)
+            setEmptyFields(data.emptyFields ?? [])
 
         }
 
@@ -46,9 +46,9 @@ export const useSubmitWorkout = () =>{
 
             setTitle('')
 
-            setReps(0)
+            setReps(null)
 
-            setLoad(0)
+            setLoad(null)
 
             setEmptyFields([])
 
