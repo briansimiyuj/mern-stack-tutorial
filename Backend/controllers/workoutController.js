@@ -40,7 +40,7 @@ const getSingleWorkout = async(req, res) =>{
             
         }
     
-        const workout = await Workout.findById(id)
+        const workout = await Workout.findOne({ _id: id, user: req.user._id })
 
         if(workout){
 
