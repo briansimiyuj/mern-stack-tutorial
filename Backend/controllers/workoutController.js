@@ -154,9 +154,11 @@ const updateWorkout = async(req, res) =>{
 
     }
 
+    const { ...updates } = req.body
+
     try{
     
-        const workout = await Workout.findByIdAndUpdate(id, req.body, { new: true })
+        const workout = await Workout.findOneAndUpdate({ _id: id, user: req.user._id }, updates, { new: true })
 
         if(!workout){
 
